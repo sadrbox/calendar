@@ -36,6 +36,11 @@ const month_names = [
 
 let month_picker = document.querySelector("#month-picker");
 
+month_picker.onclick = () => {
+	// console.log("show");
+	month_list.classList.add("show");
+};
+
 // Generate calendar
 generateCalendar = (month, year) => {
 	const week_days = document.querySelectorAll(".calendar-week-day div");
@@ -91,10 +96,30 @@ generateCalendar = (month, year) => {
 	}
 };
 
+let month_list = calendar.querySelector(".month-list");
+month_names.forEach((e, index) => {
+	let month = document.createElement("div");
+	month.innerHTML = `<div>${e}</div>`;
+	month.onclick = () => {
+		month_list.classList.remove("show");
+		curr_month.value = index;
+		generateCalendar(curr_month.value, curr_year.value);
+	};
+	month_list.appendChild(month);
+});
+
+document.querySelector("#prev-year").onclick = () => {
+	--curr_year.value;
+	generateCalendar(curr_month.value, curr_year.value);
+};
+
+document.querySelector("#next-year").onclick = () => {
+	++curr_year.value;
+	generateCalendar(curr_month.value, curr_year.value);
+};
+
 let currDate = new Date();
 let curr_month = { value: currDate.getMonth() };
 let curr_year = { value: currDate.getFullYear() };
-
-// console.log(curr_month, currDate);
 
 generateCalendar(curr_month.value, curr_year.value);

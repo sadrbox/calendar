@@ -99,10 +99,11 @@ body {
 .calendar-days {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
+	gap: 2px;
+	color: var(--color-txt);
 }
 
 .calendar-days div {
-	color: var(--color-txt);
 	width: 50px;
 	height: 50px;
 	display: flex;
@@ -111,6 +112,7 @@ body {
 	padding: 5px;
 	position: relative;
 	cursor: pointer;
+	animation: to-top 1s forwards;
 }
 
 .month-picker {
@@ -147,11 +149,6 @@ body {
 
 	&:hover {
 		background-color: var(--color-hover);
-	}
-
-	pre {
-		// line-height: 40px;
-		// font-size: 120%;
 	}
 }
 
@@ -278,5 +275,60 @@ body {
 
 	span {
 		display: none;
+	}
+}
+
+.month-list {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: var(--bg-main);
+	padding: 20px;
+	color: var(--color-txt);
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	gap: 5px;
+	transform: scale(1.5);
+	visibility: hidden;
+	pointer-events: none;
+	transition: all 0.2s ease-in-out;
+
+	&.show {
+		transform: scale(1);
+		visibility: visible;
+		pointer-events: visible;
+		transition: all 0.2s ease-in-out;
+	}
+
+	&>div {
+		display: grid;
+		place-items: center;
+
+		&>div {
+			width: 100%;
+			padding: 5px 20px;
+			border-radius: 10px;
+			text-align: center;
+			cursor: pointer;
+			font-weight: bold;
+
+			&:hover {
+				background-color: var(--color-hover);
+			}
+		}
+	}
+}
+
+@keyframes to-top {
+	0% {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }

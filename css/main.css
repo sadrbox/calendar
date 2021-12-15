@@ -110,10 +110,11 @@ body {
   display: grid;
   -ms-grid-columns: (1fr)[7];
       grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  color: var(--color-txt);
 }
 
 .calendar-days div {
-  color: var(--color-txt);
   width: 50px;
   height: 50px;
   display: -webkit-box;
@@ -128,6 +129,8 @@ body {
   padding: 5px;
   position: relative;
   cursor: pointer;
+  -webkit-animation: to-top 1s forwards;
+          animation: to-top 1s forwards;
 }
 
 .month-picker {
@@ -298,5 +301,81 @@ body {
 
 .calendar div.curr-date span {
   display: none;
+}
+
+.month-list {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-main);
+  padding: 20px;
+  color: var(--color-txt);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[3];
+      grid-template-columns: repeat(3, auto);
+  gap: 5px;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.month-list.show {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  visibility: visible;
+  pointer-events: visible;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.month-list > div {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.month-list > div > div {
+  width: 100%;
+  padding: 5px 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.month-list > div > div:hover {
+  background-color: var(--color-hover);
+}
+
+@-webkit-keyframes to-top {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes to-top {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=main.css.map */
